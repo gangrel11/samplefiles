@@ -1,0 +1,566 @@
+<DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js"></script>
+    <script type="text/javascript" src="statusFlags.js"></script>
+    <link rel="stylesheet" href="site.css" />
+    <title>Document</title>
+
+</head>
+<style>
+
+.house {
+
+  fill: lightgrey
+}
+
+.flag {
+
+opacity: 0
+}
+
+</style>
+<body>
+<script type="text/javascript">
+
+
+var data = [
+ {
+   "ID": 1,
+   "HouseID": "a1",
+   "Price": " 350,000 ",
+   "Status": "Sold",
+   "Type": "A",
+   "Bedrooms": 4,
+   "Bathrooms": 3,
+   "Enquiries": 42,
+   "Viewings": 24,
+   "Offers": 2,
+   "Listed": "01/01/2022",
+   "Date Sold": "13/02/2022",
+   "Sale Completed": "24/03/2022"
+ },
+ {
+   "ID": 2,
+   "HouseID": "a2",
+   "Price": " 350,000 ",
+   "Status": "Sold",
+   "Type": "A",
+   "Bedrooms": 4,
+   "Bathrooms": 3,
+   "Enquiries": 35,
+   "Viewings": 7,
+   "Offers": 0,
+   "Listed": "21/01/2022",
+   "Date Sold": "08/04/2022",
+   "Sale Completed": "18/05/2022"
+ },
+ {
+   "ID": 3,
+   "HouseID": "a3",
+   "Price": " 350,000 ",
+   "Status": "Available",
+   "Type": "A",
+   "Bedrooms": 4,
+   "Bathrooms": 3,
+   "Enquiries": 44,
+   "Viewings": 19,
+   "Offers": 5,
+   "Listed": "20/01/2022",
+   "Date Sold": "",
+   "Sale Completed": ""
+ },
+ {
+   "ID": 4,
+   "HouseID": "b1",
+   "Price": " 260,000 ",
+   "Status": "Available",
+   "Type": "B",
+   "Bedrooms": 3,
+   "Bathrooms": 3,
+   "Enquiries": 51,
+   "Viewings": 24,
+   "Offers": 0,
+   "Listed": "17/01/2022",
+   "Date Sold": "",
+   "Sale Completed": ""
+ },
+ {
+   "ID": 5,
+   "HouseID": "b2",
+   "Price": " 260,000 ",
+   "Status": "Sold",
+   "Type": "B",
+   "Bedrooms": 3,
+   "Bathrooms": 3,
+   "Enquiries": 53,
+   "Viewings": 15,
+   "Offers": 0,
+   "Listed": "03/01/2022",
+   "Date Sold": "07/02/2022",
+   "Sale Completed": "11/03/2022"
+ },
+ {
+   "ID": 6,
+   "HouseID": "b3",
+   "Price": " 260,000 ",
+   "Status": "Available",
+   "Type": "B",
+   "Bedrooms": 3,
+   "Bathrooms": 3,
+   "Enquiries": 30,
+   "Viewings": 25,
+   "Offers": 1,
+   "Listed": "13/01/2022",
+   "Date Sold": "",
+   "Sale Completed": ""
+ },
+ {
+   "ID": 7,
+   "HouseID": "c1",
+   "Price": " 450,000 ",
+   "Status": "Sold",
+   "Type": "C",
+   "Bedrooms": 5,
+   "Bathrooms": 4,
+   "Enquiries": 68,
+   "Viewings": 21,
+   "Offers": 0,
+   "Listed": "04/01/2022",
+   "Date Sold": "27/03/2022",
+   "Sale Completed": "09/05/2022"
+ },
+ {
+   "ID": 8,
+   "HouseID": "c2",
+   "Price": " 450,000 ",
+   "Status": "Available",
+   "Type": "C",
+   "Bedrooms": 5,
+   "Bathrooms": 4,
+   "Enquiries": 51,
+   "Viewings": 13,
+   "Offers": 0,
+   "Listed": "21/01/2022",
+   "Date Sold": "",
+   "Sale Completed": ""
+ },
+ {
+   "ID": 9,
+   "HouseID": "c3",
+   "Price": " 450,000 ",
+   "Status": "Sold",
+   "Type": "C",
+   "Bedrooms": 5,
+   "Bathrooms": 4,
+   "Enquiries": 60,
+   "Viewings": 9,
+   "Offers": 3,
+   "Listed": "05/01/2022",
+   "Date Sold": "27/02/2022",
+   "Sale Completed": "25/03/2022"
+ },
+ {
+   "ID": 10,
+   "HouseID": "c4",
+   "Price": " 450,000 ",
+   "Status": "Sold",
+   "Type": "C",
+   "Bedrooms": 5,
+   "Bathrooms": 4,
+   "Enquiries": 56,
+   "Viewings": 11,
+   "Offers": 0,
+   "Listed": "04/01/2022",
+   "Date Sold": "07/03/2022",
+   "Sale Completed": "25/04/2022"
+ },
+ {
+   "ID": 11,
+   "HouseID": "d1",
+   "Price": " 400,000 ",
+   "Status": "Pending",
+   "Type": "D",
+   "Bedrooms": 5,
+   "Bathrooms": 3,
+   "Enquiries": 67,
+   "Viewings": 12,
+   "Offers": 5,
+   "Listed": "11/01/2022",
+   "Date Sold": "",
+   "Sale Completed": ""
+ },
+ {
+   "ID": 12,
+   "HouseID": "d2",
+   "Price": " 400,000 ",
+   "Status": "Available",
+   "Type": "D",
+   "Bedrooms": 5,
+   "Bathrooms": 3,
+   "Enquiries": 32,
+   "Viewings": 5,
+   "Offers": 3,
+   "Listed": "07/01/2022",
+   "Date Sold": "",
+   "Sale Completed": ""
+ },
+ {
+   "ID": 13,
+   "HouseID": "d3",
+   "Price": " 400,000 ",
+   "Status": "Pending",
+   "Type": "D",
+   "Bedrooms": 5,
+   "Bathrooms": 3,
+   "Enquiries": 33,
+   "Viewings": 12,
+   "Offers": 2,
+   "Listed": "13/01/2022",
+   "Date Sold": "",
+   "Sale Completed": ""
+ },
+ {
+   "ID": 14,
+   "HouseID": "d4",
+   "Price": " 400,000 ",
+   "Status": "Sold",
+   "Type": "D",
+   "Bedrooms": 5,
+   "Bathrooms": 3,
+   "Enquiries": 50,
+   "Viewings": 11,
+   "Offers": 5,
+   "Listed": "20/01/2022",
+   "Date Sold": "28/03/2022",
+   "Sale Completed": "15/05/2022"
+ },
+ {
+   "ID": 15,
+   "HouseID": "e1",
+   "Price": " 375,000 ",
+   "Status": "Sold",
+   "Type": "E",
+   "Bedrooms": 4,
+   "Bathrooms": 3,
+   "Enquiries": 55,
+   "Viewings": 7,
+   "Offers": 3,
+   "Listed": "17/01/2022",
+   "Date Sold": "25/03/2022",
+   "Sale Completed": "10/05/2022"
+ },
+ {
+   "ID": 16,
+   "HouseID": "e2",
+   "Price": " 375,000 ",
+   "Status": "Available",
+   "Type": "E",
+   "Bedrooms": 4,
+   "Bathrooms": 3,
+   "Enquiries": 56,
+   "Viewings": 11,
+   "Offers": 3,
+   "Listed": "14/01/2022",
+   "Date Sold": "",
+   "Sale Completed": ""
+ },
+ {
+   "ID": 17,
+   "HouseID": "e3",
+   "Price": " 375,000 ",
+   "Status": "Sold",
+   "Type": "E",
+   "Bedrooms": 4,
+   "Bathrooms": 3,
+   "Enquiries": 41,
+   "Viewings": 9,
+   "Offers": 0,
+   "Listed": "09/01/2022",
+   "Date Sold": "14/02/2022",
+   "Sale Completed": "04/04/2022"
+ },
+ {
+   "ID": 18,
+   "HouseID": "f1",
+   "Price": " 250,000 ",
+   "Status": "Pending",
+   "Type": "F",
+   "Bedrooms": 3,
+   "Bathrooms": 2,
+   "Enquiries": 33,
+   "Viewings": 5,
+   "Offers": 5,
+   "Listed": "17/01/2022",
+   "Date Sold": "",
+   "Sale Completed": ""
+ },
+ {
+   "ID": 19,
+   "HouseID": "f2",
+   "Price": " 250,000 ",
+   "Status": "Sold",
+   "Type": "F",
+   "Bedrooms": 3,
+   "Bathrooms": 2,
+   "Enquiries": 58,
+   "Viewings": 15,
+   "Offers": 0,
+   "Listed": "21/01/2022",
+   "Date Sold": "27/04/2022",
+   "Sale Completed": "15/06/2022"
+ },
+ {
+   "ID": 20,
+   "HouseID": "f3",
+   "Price": " 250,000 ",
+   "Status": "Available",
+   "Type": "F",
+   "Bedrooms": 3,
+   "Bathrooms": 2,
+   "Enquiries": 51,
+   "Viewings": 14,
+   "Offers": 5,
+   "Listed": "11/01/2022",
+   "Date Sold": "",
+   "Sale Completed": ""
+ },
+ {
+   "ID": 21,
+   "HouseID": "g1",
+   "Price": " 175,000 ",
+   "Status": "Pending",
+   "Type": "G",
+   "Bedrooms": 2,
+   "Bathrooms": 2,
+   "Enquiries": 44,
+   "Viewings": 10,
+   "Offers": 1,
+   "Listed": "04/01/2022",
+   "Date Sold": "",
+   "Sale Completed": ""
+ },
+ {
+   "ID": 22,
+   "HouseID": "g2",
+   "Price": " 175,000 ",
+   "Status": "Sold",
+   "Type": "G",
+   "Bedrooms": 2,
+   "Bathrooms": 2,
+   "Enquiries": 40,
+   "Viewings": 15,
+   "Offers": 5,
+   "Listed": "12/01/2022",
+   "Date Sold": "22/03/2022",
+   "Sale Completed": "24/04/2022"
+ },
+ {
+   "ID": 25,
+   "HouseID": "h1",
+   "Price": " 200,000 ",
+   "Status": "Pending",
+   "Type": "H",
+   "Bedrooms": 2,
+   "Bathrooms": 2,
+   "Enquiries": 28,
+   "Viewings": 19,
+   "Offers": 4,
+   "Listed": "04/01/2022",
+   "Date Sold": "",
+   "Sale Completed": ""
+ },
+ {
+   "ID": 26,
+   "HouseID": "h2",
+   "Price": " 200,000 ",
+   "Status": "Sold",
+   "Type": "H",
+   "Bedrooms": 2,
+   "Bathrooms": 2,
+   "Enquiries": 56,
+   "Viewings": 17,
+   "Offers": 4,
+   "Listed": "18/01/2022",
+   "Date Sold": "09/04/2022",
+   "Sale Completed": "05/05/2022"
+ },
+ {
+   "ID": 27,
+   "HouseID": "h3",
+   "Price": " 200,000 ",
+   "Status": "Sold",
+   "Type": "H",
+   "Bedrooms": 2,
+   "Bathrooms": 2,
+   "Enquiries": 27,
+   "Viewings": 8,
+   "Offers": 2,
+   "Listed": "04/01/2022",
+   "Date Sold": "12/04/2022",
+   "Sale Completed": "18/05/2022"
+ },
+ {
+   "ID": 28,
+   "HouseID": "h4",
+   "Price": " 200,000 ",
+   "Status": "Available",
+   "Type": "H",
+   "Bedrooms": 2,
+   "Bathrooms": 2,
+   "Enquiries": 57,
+   "Viewings": 7,
+   "Offers": 2,
+   "Listed": "04/01/2022",
+   "Date Sold": "",
+   "Sale Completed": ""
+ },
+ {
+   "ID": 29,
+   "HouseID": "i1",
+   "Price": " 275,000 ",
+   "Status": "Sold",
+   "Type": "I",
+   "Bedrooms": 3,
+   "Bathrooms": 3,
+   "Enquiries": 44,
+   "Viewings": 7,
+   "Offers": 1,
+   "Listed": "02/01/2022",
+   "Date Sold": "17/02/2022",
+   "Sale Completed": "27/03/2022"
+ },
+ {
+   "ID": 30,
+   "HouseID": "i2",
+   "Price": " 275,000 ",
+   "Status": "Available",
+   "Type": "I",
+   "Bedrooms": 3,
+   "Bathrooms": 3,
+   "Enquiries": 63,
+   "Viewings": 9,
+   "Offers": 2,
+   "Listed": "10/01/2022",
+   "Date Sold": "",
+   "Sale Completed": ""
+ },
+ {
+   "ID": 31,
+   "HouseID": "i3",
+   "Price": " 275,000 ",
+   "Status": "Sold",
+   "Type": "I",
+   "Bedrooms": 3,
+   "Bathrooms": 3,
+   "Enquiries": 47,
+   "Viewings": 9,
+   "Offers": 0,
+   "Listed": "07/01/2022",
+   "Date Sold": "11/04/2022",
+   "Sale Completed": "26/05/2022"
+ }
+]
+
+
+//var data = data.filter(function(d){ return d.Type == "B" })
+
+
+var settings = [
+  { "show_status": 1, "hide_unavailable": 0}, 
+
+]
+
+
+var show_status = settings[0].show_status
+var hide_unavailable = settings[0].hide_unavailable
+
+
+
+console.log(show_status)
+
+const svgUrl =   "/Vector file v4.svg"; 
+
+d3.xml(svgUrl).then(render);
+
+
+function render(svg) {
+
+
+    d3.select("body").node().append(svg.documentElement)
+
+    d3.selectAll('.status_sold,.status_pending,.status_available').selectAll('rect,path,polygon').classed('house', true)
+    d3.selectAll('.status_sold,.status_pending,.status_available').selectAll('image').classed('flag', true)
+
+
+
+  const ids = data.map(d => d.HouseID);
+  ids.forEach(id => d3.select(`#${id}`)
+  
+
+.on("mouseover", function(d) {
+    d3.select(this)
+    .attr("opacity", 0.9)
+    
+  })
+
+.on("mouseout", function(d) {
+    d3.select(this).attr("opacity", 1);  
+  })
+
+  .selectAll('image,rect,path,polygon,.status_sold,.status_pending,.status_available').classed('house', false).classed('flag', false)
+  
+  );
+
+
+var status_house = d3.selectAll('.status_sold,.status_pending,.status_available').selectAll('rect,path,polygon')
+var sold_house = d3.selectAll('.status_sold,.status_pending').selectAll('rect,path,polygon')
+var status_flags = d3.selectAll('.status_sold,.status_pending,.status_available').selectAll('image')
+var sold_flags = d3.selectAll('.status_sold,.status_pending').selectAll('image')
+
+if (show_status == 1) { status_flags.attr("visibility", "visible") } else {status_flags.attr("visibility", "hidden") }
+
+
+if ( hide_unavailable == 0 ) { 
+
+if ( show_status == 1 )
+  
+  sold_flags.attr("visibility", "visible")
+
+} 
+  
+  else {
+    
+  sold_flags.attr("visibility", "hidden")
+  sold_house.style("fill", "lightgrey")
+
+
+
+
+}
+
+
+var sold = d3.select('#sold')
+var pending = d3.select('#pending')
+var available = d3.select('#available')
+
+sold.attr("visibility", "hidden");
+pending.attr("visibility", "hidden");
+available.attr("visibility", "hidden");
+
+
+}
+
+
+
+
+
+
+</script>
+
+    
+</body>
+</html> 
